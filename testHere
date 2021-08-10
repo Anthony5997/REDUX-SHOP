@@ -1,0 +1,28 @@
+    <Segment key={id}>
+              <Card>
+                <Image  src={image} alt={title} wrapped ui={false} />
+                <Card.Content>
+                    <Card.Header>{title}</Card.Header>
+                    <Card.Meta>
+                        <span className='price'>{price} $</span>
+                    </Card.Meta>
+                    <Card.Meta>
+                        <span className='meta'>{category}</span>
+                    </Card.Meta>
+                </Card.Content>
+                <Card.Content extra>
+                </Card.Content>
+            </Card>
+        </Segment>
+
+
+
+
+        RENDER  : 
+
+
+           <Grid columns='equal'>
+                <Grid.Row>
+                    {renderList}
+                </Grid.Row>
+            </Grid>
