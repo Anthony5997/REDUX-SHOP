@@ -1,38 +1,25 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectedProduct , removeSelectedProduct } from '../Redux/actions/productActions';
+import { addToCardProduct } from '../Redux/actions/productActions';
 import { Container } from 'semantic-ui-react'
 
 const ProductDetail = () => {
-    const product = useSelector((state) => state.product);
-    const {image, title, description, price, category} = product;
     const {productId} = useParams();
+    const product = useSelector((state) => state.products[productId]);
+    const {image, title, description, price, category} = product;
     const dispatch = useDispatch();
-    console.log(product);
 
-    const fetchProductDetail = async () => {
-        const response = await axios.get(`https://fakestoreapi.com/products/${productId}`)
-        .catch((err) => {
-            console.log("ERROR DETAIL : ", err);
-        });
-        dispatch(selectedProduct(response.data))
+
+    const addToCard = () => {
+         console.log("Product to add : ",product);
+       return dispatch(addToCardProduct(product))
+
     }
-
-    useEffect(() => {
-        if(productId && productId !== "");
-        fetchProductDetail();
-        return () => {
-            dispatch(removeSelectedProduct())
-        }
-    }, [productId])
     return (
         <Container>
             <div className="ui grid container">
-            {Object.keys(product).length === 0 ? (
-                <div>...Loading</div>
-            ) : (
+           
                 <div className="ui placeholder segment">
                 <div className="ui two column stackable center aligned grid">
                     <div className="ui vertical divider">AND</div>
@@ -48,16 +35,15 @@ const ProductDetail = () => {
                         <h3 className="ui brown block header">{category}</h3>
                         <p>{description}</p>
                         <div className="ui vertical animated button" tabIndex="0">
-                        <div className="hidden content">
+                        <div className="hidden content" onClick={()=>addToCard()}>
                             <i className="shop icon"></i>
                         </div>
-                        <div className="visible content">Add to Cart</div>
+                        <div className="visible content" onClick={()=>addToCard()}>Add to Cart</div>
                         </div>
                     </div>
                     </div>
                 </div>
                 </div>
-            )}
             </div>
         </Container>
         );

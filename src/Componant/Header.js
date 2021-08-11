@@ -1,15 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Container, Icon } from 'semantic-ui-react';
+
 
 const Header = () => {
     return (
-        <div className="ui menu margin-header">
-            <div className="ui container center">
-                <Link to="/">
-                <h2>Super Shop !</h2>
-                </Link>
+        <Container>
+            <div className="ui menu margin-header">
+                <div className="ui container">
+                    <Link to="/">
+                        <Icon name="home" />                
+                    </Link>
+                </div>
+                <div className="ui container center">
+                    <Link to="/shopcart">
+                        <Icon name="shopping cart" />
+                    </Link>
+                </div>
             </div>
-        </div>
+        </Container>
+
     );
 };
 

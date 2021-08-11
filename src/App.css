@@ -29,7 +29,25 @@
 }
 
 .margin-header{
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  display: flex;
+  justify-content: flex-start;
+  align-self: center;
+}
+
+.cardList{
+margin-top: 20px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  background-color: lightyellow;
+  padding: 20px;
+}
+
+.cardList .listItem{
+  display: flex;
+  justify-content: flex-start;
 }
 @keyframes App-logo-spin {
   from {

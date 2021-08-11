@@ -1,17 +1,17 @@
 import { ActionTypes } from "../costants/actionTypes";
 
 const initialState = {
-    products : [],
+    products : {},
+    card : []
 };
 
+export const productReducer = (state = initialState.products, {type , payload}) => {
 
-export const productReducer = (state = initialState, {type , payload}) => {
+    let newState;
     switch (type) {
         case ActionTypes.SET_PRODUCTS:
-            return {
-                ...state,
-                products : payload,
-            }
+            newState = payload
+            return newState
             break;
             
         default:
@@ -20,20 +20,23 @@ export const productReducer = (state = initialState, {type , payload}) => {
     }
 }
 
-export const selectedProductReducer = (state = initialState, {type , payload}) => {
-    switch (type) {
-        case ActionTypes.SELECTED_PRODUCT:
-            return {
-                ...state,
-                ...payload,
-            }
-        
-            break;
 
-        case ActionTypes.REMOVE_SELECTED_PRODUCT:
-            return {}
+export const addToCardReducer = (state = initialState.card, {type , payload}) => {
+    let newState;
+    console.log(state);
+    switch (type) {
+
+        case ActionTypes.ADD_TO_CARD:
+            newState =  state.concat([payload])
+            console.log(newState);
+            return newState
             break;
-    
+        case ActionTypes.REMOVE_FROM_CARD:
+             newState = payload
+            console.log(newState);
+            return newState
+            break;  
+
         default:
             return state
             break;
