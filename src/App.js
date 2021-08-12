@@ -24,7 +24,6 @@ function App() {
       })
       dispatch(setProducts(response.data))
 
-console.log('storage', getStorage())
       if(sessionStorage.length !== 0){         
         dispatch(initCardProduct(getStorage()))
       }

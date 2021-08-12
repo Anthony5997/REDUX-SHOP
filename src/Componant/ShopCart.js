@@ -1,8 +1,7 @@
-import { get } from 'mongoose';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Image, Grid, Button, Icon } from 'semantic-ui-react'
-import { removeFromCardProduct, initCardProduct } from '../Redux/actions/productActions';
+import { removeFromCardProduct } from '../Redux/actions/productActions';
 
 
 
@@ -10,7 +9,6 @@ const ShopCart = () => {
 
     const dispatch = useDispatch();
     const shopCart = useSelector((state) => state.card);
-    console.log("SHOP CARD : ", shopCart);
 
 
     
@@ -21,7 +19,6 @@ const ShopCart = () => {
         totalPrice = totalPrice + shopCart[i].price
       }
 
-      console.log("total price : ",totalPrice);
       return totalPrice;
 
     }
