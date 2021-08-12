@@ -12,8 +12,10 @@ const ProductDetail = () => {
 
 
     const addToCard = () => {
-         console.log("Product to add : ",product);
-       return dispatch(addToCardProduct(product))
+
+         console.log("Product to add : ",product.id);
+         sessionStorage.setItem(product.title, JSON.stringify(product))
+        return dispatch(addToCardProduct(product))
 
     }
     return (

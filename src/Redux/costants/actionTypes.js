@@ -1,6 +1,8 @@
 export const ActionTypes = {
     SET_PRODUCTS : "SET_PRODUCTS",
     ADD_TO_CARD : "ADD_TO_CARD",
+    INIT_CARD : "INIT_CARD",
+    UPDATE_CARD : "UPDATE_CARD",
     REMOVE_FROM_CARD : "REMOVE_FROM_CARD",
 
 }

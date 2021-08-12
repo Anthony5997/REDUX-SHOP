@@ -1,14 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import ProductComponent from './ProductComponent';
 
 const ProductListing = () => {
-    const products = useSelector((state) => state.products);
 
-
-
-
-    // console.log("STATE PRODUCT LISTING : ", products);
     return (
         <>
 
@@ -20,7 +14,7 @@ const ProductListing = () => {
             </div>
             <div className="twelve wide column">
                 <h1>Product</h1>
-            <div className="ui four column grid">
+            <div className="ui three column grid">
                 <ProductComponent />
                 </div>
             </div>

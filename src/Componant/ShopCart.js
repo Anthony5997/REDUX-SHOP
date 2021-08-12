@@ -1,7 +1,8 @@
+import { get } from 'mongoose';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { List, Image, Grid, Button, Icon } from 'semantic-ui-react'
-import { removeFromCardProduct } from '../Redux/actions/productActions';
+import { Image, Grid, Button, Icon } from 'semantic-ui-react'
+import { removeFromCardProduct, initCardProduct } from '../Redux/actions/productActions';
 
 
 
@@ -11,16 +12,16 @@ const ShopCart = () => {
     const shopCart = useSelector((state) => state.card);
     console.log("SHOP CARD : ", shopCart);
 
+
     
     const globalPrice = () => {
 
-      let totalPrice;
+      let totalPrice = 0;
       for(let i = 0; i < shopCart.length ; i++){
-        console.log("PRICE" ,shopCart[i].price);
-        totalPrice += shopCart[i].price
+        totalPrice = totalPrice + shopCart[i].price
       }
 
-      console.log(totalPrice);
+      console.log("total price : ",totalPrice);
       return totalPrice;
 
     }
@@ -28,29 +29,24 @@ const ShopCart = () => {
     const deleteItem = (id) => {
   
       let test =  shopCart.filter((shopCar, key) => {
-        if (key != id) {
+        if (key !== id) {
           return shopCart
         }
+
       })
-      console.log(test);
-    return dispatch(removeFromCardProduct(test))
-  
-    //     for( let i = 0; i < shopCart.length; i++){ 
-                                   
-    //     if ( shopCart[i].id === id.id) { 
-    //       console.log("index tab : ", shopCart[i].id, "id du produit: ", id.id); 
+      
+      sessionStorage.removeItem(shopCart[id].title );
 
-    //        shopCart.splice(i, id); 
-    //        shopCart.sort()
-    //     }
-    // }
+      return dispatch(removeFromCardProduct(test))
+      
 
-    }
+  }
+
+
 
 
     const renderList = ()=> shopCart.map((item, key) => {
 
-console.log(key);
     return (
       <div >
         <Grid key={item}>
@@ -80,7 +76,7 @@ console.log(key);
         <div className="cardList">
 
               {renderList()}
-              <div className="cardList">
+              <div className="cardList global-price">
                 Global Price : 
               {globalPrice()} $
               </div>

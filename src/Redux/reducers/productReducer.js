@@ -23,17 +23,24 @@ export const productReducer = (state = initialState.products, {type , payload}) 
 
 export const addToCardReducer = (state = initialState.card, {type , payload}) => {
     let newState;
-    console.log(state);
     switch (type) {
 
+        case ActionTypes.INIT_CARD:
+            newState = payload
+           return newState
+           break;
+        case ActionTypes.UPDATE_CARD:
+            console.log("payload du update : ", payload);
+            newState ={ payload, quantity: state.quantity+ 1}
+           return newState
+           break;
         case ActionTypes.ADD_TO_CARD:
+            console.log("payload dans add : ", payload);
             newState =  state.concat([payload])
-            console.log(newState);
             return newState
             break;
         case ActionTypes.REMOVE_FROM_CARD:
              newState = payload
-            console.log(newState);
             return newState
             break;  
 

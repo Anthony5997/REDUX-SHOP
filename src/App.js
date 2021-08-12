@@ -8,7 +8,7 @@ import { Container } from 'semantic-ui-react'
 
 import axios from 'axios';
 import { useDispatch,  useSelector} from 'react-redux';
-import { setProducts } from './Redux/actions/productActions';
+import { setProducts, initCardProduct } from './Redux/actions/productActions';
 import ShopCart from './Componant/ShopCart';
 
 
@@ -22,8 +22,23 @@ function App() {
       .catch((err)=> {
           console.log("ERROR : ", err);
       })
-      // console.log(response.data);
       dispatch(setProducts(response.data))
+
+console.log('storage', getStorage())
+      if(sessionStorage.length !== 0){         
+        dispatch(initCardProduct(getStorage()))
+      }
+
+  }
+
+ const getStorage = () => {
+
+      let data = [];
+      for(let i = 0 ; i < sessionStorage.length; i++){
+        let key = sessionStorage.key(i);
+        data.push(JSON.parse(sessionStorage.getItem(key)))
+      }
+      return data;
   }
 
   useEffect(() => {
@@ -34,15 +49,18 @@ function App() {
     <div className="App">
       <Router>
         <Header />
-        <Container>
+        <div className="product-detail-global">
 
-        <Switch>
-        <Route path="/shopcart" exact component={ShopCart} />
-          <Route path="/" exact component={ProductListing} />
-          {Object.keys(products).length > 0 ? <Route path="/product/:productId" exact component={ProductDetail} /> : <Redirect to="/" />}
-          <Route> 404 NOT FOUND</Route>
-        </Switch>
-        </Container>
+          <Container>
+          <Switch>
+          <Route path="/shopcart" exact component={ShopCart} />
+            <Route path="/" exact component={ProductListing} />
+            {Object.keys(products).length > 0 ? <Route path="/product/:productId" exact component={ProductDetail} /> : <Redirect to="/" />}
+            <Route> 404 NOT FOUND</Route>
+          </Switch>
+          </Container>
+        </div>
+
       </Router>
 
     </div>
